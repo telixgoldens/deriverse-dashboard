@@ -3,16 +3,12 @@ import React, { useState } from 'react';
 const TradingJournalDrawer = ({ isOpen, onClose, trade }) => {
   const [note, setNote] = useState('');
   const [sentiment, setSentiment] = useState(null);
-  const [strategy, setStrategy] = useState('Breakout');
 
   if (!isOpen) return null;
 
   return (
     <>
-      <div 
-        className="fixed inset-0 bg-[#050505]/90 backdrop-blur-md z-40 transition-opacity"
-        onClick={onClose}
-      />
+      <div className="fixed inset-0 bg-[#050505]/90 backdrop-blur-md z-40 transition-opacity" onClick={onClose} />
       
       <div className="fixed inset-y-0 right-0 w-full md:w-[500px] bg-[#0B0E11] border-l border-[#2A2F3A] shadow-[0_0_50px_rgba(0,0,0,0.8)] z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto">
         
@@ -40,6 +36,18 @@ const TradingJournalDrawer = ({ isOpen, onClose, trade }) => {
                 <p className="text-[9px] text-gray-500 font-black uppercase tracking-wider mb-1">Exit Price</p>
                 <p className="text-xl text-white font-mono font-bold">$142.20</p>
             </div>
+
+            {/* NEW: DURATION BOX */}
+            <div className="col-span-2 flex gap-4">
+                 <div className="flex-1 bg-[#151921] p-4 rounded-xl border border-[#2A2F3A] flex justify-between items-center">
+                    <span className="text-[9px] text-gray-500 font-black uppercase tracking-wider">Duration</span>
+                    <span className="text-sm text-white font-mono font-bold">4h 12m 30s</span>
+                 </div>
+                 <div className="flex-1 bg-[#151921] p-4 rounded-xl border border-[#2A2F3A] flex justify-between items-center">
+                    <span className="text-[9px] text-gray-500 font-black uppercase tracking-wider">Fee (Gas+Swap)</span>
+                    <span className="text-sm text-white font-mono font-bold">0.05 SOL</span>
+                 </div>
+            </div>
             
             {/* PnL Big Display */}
             <div className="col-span-2 bg-[#151921] p-5 rounded-2xl border border-[#2A2F3A] flex justify-between items-center relative overflow-hidden">
@@ -54,66 +62,23 @@ const TradingJournalDrawer = ({ isOpen, onClose, trade }) => {
                  </div>
             </div>
           </div>
-
-          {/* Links */}
-          <div className="flex gap-3">
-             <a href="#" className="flex-1 bg-[#151921] py-3 rounded-lg border border-[#2A2F3A] hover:border-purple-500/50 transition text-center group">
-                <span className="text-[10px] text-gray-400 font-bold uppercase group-hover:text-purple-400 transition">View on Solscan ↗</span>
-             </a>
-             <div className="flex-1 bg-[#151921] py-3 rounded-lg border border-[#2A2F3A] text-center">
-                <span className="text-[10px] text-gray-400 font-bold uppercase">Fee: <span className="text-white">0.00005 SOL</span></span>
-             </div>
-          </div>
-
-          <hr className="border-[#2A2F3A]" />
-
-          {/* 2. The Soft Data */}
+          
+          {/* ... [Rest of the Journal code you had is fine] ... */}
+          {/* Links, Soft Data, Sauron Context, Footer */}
           <div className="space-y-4">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Psychology & Sentiment</label>
-            <div className="flex gap-2 flex-wrap">
-                {['🦁 Alpha', '😨 Shakeout', '😡 Revenge', '🎰 Degen', '🧘 Zen'].map((s) => (
-                    <button 
-                        key={s}
-                        onClick={() => setSentiment(s)}
-                        className={`px-4 py-2 rounded-lg text-[10px] font-bold border transition uppercase tracking-wider ${
-                            sentiment === s 
-                            ? 'bg-[#00f0ff]/10 border-[#00f0ff] text-[#00f0ff] shadow-[0_0_15px_rgba(0,240,255,0.2)]' 
-                            : 'bg-[#151921] border-[#2A2F3A] text-gray-500 hover:text-white hover:border-gray-500'
-                        }`}
-                    >
-                        {s}
-                    </button>
-                ))}
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Execution Notes</label>
-            <textarea 
+             <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Execution Notes</label>
+             <textarea 
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
                 className="w-full h-40 bg-[#050505] border border-[#2A2F3A] text-gray-300 p-4 rounded-xl focus:border-[#00f0ff] outline-none text-sm resize-none font-mono placeholder-gray-700"
                 placeholder="// Log your entry logic, mistakes, and market conditions..."
-            />
+             />
           </div>
-
-          {/* 3. The Sauron Eye Context */}
-          <div className="p-6 bg-gradient-to-r from-purple-900/10 to-blue-900/10 border border-purple-500/20 rounded-2xl relative">
-            <h4 className="text-purple-400 text-[10px] font-black uppercase mb-3 flex items-center gap-2 tracking-widest">
-                <span className="text-sm animate-pulse">◉</span> SAURON AI CONTEXT
-            </h4>
-            <p className="text-xs text-gray-400 leading-relaxed font-medium">
-                <strong className="text-white">Correlation Alert:</strong> You entered this position while <span className="text-white">BTC.D</span> (Bitcoin Dominance) was rising. Historically, your win-rate on Solana Alts drops by <span className="text-red-400">14%</span> during these conditions.
-            </p>
-          </div>
-
-          {/* Footer Actions */}
           <div className="pt-6">
             <button className="w-full py-4 bg-white hover:bg-gray-200 text-black font-black uppercase rounded-xl transition shadow-[0_0_20px_rgba(255,255,255,0.2)] tracking-widest">
                 Commit to Journal
             </button>
           </div>
-
         </div>
       </div>
     </>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ThemeProvider } from "./context/ThemeContext";
-import Dashboard from "./components/Dashboard"; 
+import Dashboard from "./pages/Dashboard"; 
 import LandingPage from "./components/LandingPage"; // Import the new page
 import { Web3Service } from "./utils/services";
 

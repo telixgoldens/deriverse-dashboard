@@ -6,10 +6,11 @@ export const MOCK_HOLDINGS = [
     type: "perp",
     side: "long",
     leverage: 5,
-    quantity: 145.2, // Size in SOL
+    quantity: 145.2, 
     entryPrice: 124.50,
     price: 142.80, // Current Mark Price
     liquidationPrice: 105.20,
+    fees: 1.25, // Added for Fee Composition Req
     pnl: 2657.16,
     pnlPercent: 14.6,
     value: 20734.56,
@@ -25,6 +26,7 @@ export const MOCK_HOLDINGS = [
     entryPrice: 1.25,
     price: 1.18,
     liquidationPrice: 1.45,
+    fees: 4.50, // High fee on short
     pnl: 1050.00,
     pnlPercent: 5.6,
     value: 17700.00,
@@ -40,6 +42,7 @@ export const MOCK_HOLDINGS = [
     entryPrice: 0.000021,
     price: 0.000024,
     liquidationPrice: 0.000019,
+    fees: 0.85,
     pnl: 450.00,
     pnlPercent: 14.2,
     value: 3600.00,
@@ -55,6 +58,7 @@ export const MOCK_HOLDINGS = [
     entryPrice: 2.80,
     price: 2.65,
     liquidationPrice: 1.10,
+    fees: 0.40,
     pnl: -75.00,
     pnlPercent: -5.3,
     value: 1325.00,
