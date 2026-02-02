@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import { ThemeProvider } from "./context/ThemeContext";
+import Dashboard from "./components/Dashboard"; 
+import LandingPage from "./components/LandingPage"; // Import the new page
+import { Web3Service } from "./utils/services";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [walletConnected, setWalletConnected] = useState(false);
+  const [isConnecting, setIsConnecting] = useState(false);
+
+  // This function handles the transition from Landing -> Dashboard
+  const handleLogin = async () => {
+    setIsConnecting(true);
+    try {
+      // We call your service to trigger the wallet popup
+      await Web3Service.connectWallet();
+      
+      // Artificial delay to show the animation (optional, feels smoother)
+      setTimeout(() => {
+        setWalletConnected(true);
+        setIsConnecting(false);
+      }, 800);
+      
+    } catch (error) {
+      console.error("Connection failed", error);
+      setIsConnecting(false);
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <ThemeProvider>
+      <div className="min-h-screen w-full bg-[#0B0E11] text-gray-200 font-sans selection:bg-[#00f0ff]/30 selection:text-[#00f0ff]">
+        
+        {/* CONDITIONAL RENDERING */}
+        {!walletConnected ? (
+          <LandingPage onConnect={handleLogin} />
+        ) : (
+          <Dashboard />
+        )}
+
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;
