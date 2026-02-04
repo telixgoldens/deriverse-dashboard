@@ -1,0 +1,263 @@
+/* LandingPage.css */
+
+/* Main Container */
+.landing-container {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #0b0e11; /* Fallback color */
+}
+
+/* 1. Background Layer */
+.landing-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('/deriverse-img.jpeg'); /* Ensure this file exists in /public */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* The Overlay - Adjusted for Clarity */
+.landing-overlay {
+  position: absolute;
+  inset: 0;
+  /* Reduced opacity from 0.6 to 0.3 to make image brighter */
+  background-color: rgba(0, 0, 0, 0.3); 
+  /* Removed backdrop-blur to make image clearer */
+}
+
+/* 2. Main Content Wrapper */
+.content-wrapper {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 1rem;
+  /* Animation shorthand (fade-in + zoom-in) */
+  animation: fadeInZoom 0.7s ease-out forwards;
+}
+
+@keyframes fadeInZoom {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Badge (Deriverse Ecosystem) */
+.ecosystem-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  margin-bottom: 2rem;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.status-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: #00f0ff;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+
+.badge-text {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: #d1d5db;
+  text-transform: uppercase;
+}
+
+/* Hero Typography */
+.hero-title {
+  font-size: 3.75rem; /* Mobile */
+  font-weight: 900;
+  color: #fff;
+  font-style: italic;
+  letter-spacing: -0.05em;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 768px) {
+  .hero-title { font-size: 6rem; }
+}
+
+.highlight-text {
+  background: linear-gradient(to right, #00f0ff, #9945FF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-subtitle {
+  max-width: 36rem;
+  color: #9ca3af;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.625;
+  letter-spacing: 0.025em;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .hero-subtitle { font-size: 1rem; }
+}
+
+.hero-subtitle strong {
+  color: #fff;
+}
+
+/* 3. Call to Action Button */
+.connect-btn {
+  position: relative;
+  padding: 1.5rem 3rem;
+  background-color: #0B0E11;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid #2A2F3A;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.connect-btn:hover {
+  border-color: #00f0ff;
+  box-shadow: 0 0 40px rgba(0, 240, 255, 0.3);
+}
+
+/* Button Hover Gradient Background */
+.btn-gradient-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, #00f0ff, #9945FF, #00f0ff);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.connect-btn:hover .btn-gradient-bg {
+  opacity: 0.1;
+}
+
+/* Button Text Content */
+.btn-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 2;
+}
+
+.btn-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: color 0.3s;
+  text-align: left;
+}
+
+.connect-btn:hover .btn-label {
+  color: #00f0ff;
+}
+
+.btn-main-text {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #fff;
+  font-style: italic;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+/* Arrow Icon */
+.arrow-circle {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s, background-color 0.3s, border-color 0.3s, color 0.3s;
+  color: white;
+}
+
+.connect-btn:hover .arrow-circle {
+  transform: translateX(0.5rem);
+  background-color: #00f0ff;
+  border-color: #00f0ff;
+  color: black;
+}
+
+.arrow-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Footer Stats */
+.stats-grid {
+  margin-top: 5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  opacity: 0.6;
+}
+
+@media (min-width: 768px) {
+  .stats-grid { gap: 5rem; }
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #fff;
+}
+
+.stat-label {
+  font-size: 9px;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.25rem;
+}
+
+/* Bottom Decorative Bar */
+.bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to right, #00f0ff, transparent, #9945FF);
+  opacity: 0.5;
+}

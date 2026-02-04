@@ -13,10 +13,10 @@ const Sidebar = ({
 
   const menuItems = [
     { id: "dashboard", label: "Terminal", icon: "M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6z" },
-    { id: "watchlist", label: "Market Watch", icon: "M15 12a3 3 0 11-6 0 3 3 0 016 0z" },
-    { id: "swap", label: "Execution", icon: "M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" },
-    { id: "activity", label: "Ledger", icon: "M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" },
-    { id: "reports", label: "Analytics", icon: "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+  { id: "market", label: "Market Watch", icon: "M15 12a3 3 0 11-6 0 3 3 0 016 0z" }, 
+  { id: "swap", label: "Execution", icon: "M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" },
+  { id: "ledger", label: "Ledger", icon: "M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" }, // Changed from "activity"
+  { id: "analytics", label: "Analytics", icon: "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" }, 
   ];
 
   return (
