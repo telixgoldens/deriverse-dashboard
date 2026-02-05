@@ -87,7 +87,7 @@ const Dashboard = () => {
   const handleTradeFromMarket = (asset) => {
     setTerminalToken({
       ...asset,
-      side: "long", 
+      side: "long",
       leverage: "1",
       pnl: 0,
     });
@@ -142,48 +142,55 @@ const Dashboard = () => {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
         <div className="bg-[#151921] p-6 rounded-2xl border border-[#2A2F3A] shadow-lg relative overflow-hidden group hover:border-[#00f0ff]/30 transition">
-          <div className="absolute top-4 right-4 text-right z-10">
-            <p className="text-[9px] text-gray-500 font-bold uppercase">
-              Realized
-            </p>
-            <p className="text-xs font-mono text-[#00ff9d]">
-              {isPrivate
-                ? "****"
-                : `+$${traderMetrics.realizedPnL.toLocaleString()}`}
-            </p>
-            <p className="text-[9px] text-gray-500 font-bold uppercase mt-1">
-              Unrealized
-            </p>
-            <p
-              className={`text-xs font-mono ${traderMetrics.unrealizedPnL >= 0 ? "text-[#00f0ff]" : "text-red-500"}`}
-            >
-              {isPrivate
-                ? "****"
-                : (traderMetrics.unrealizedPnL >= 0 ? "+" : "") +
-                  `$${traderMetrics.unrealizedPnL.toLocaleString()}`}
-            </p>
-          </div>
+          <div className="flex justify-between items-start">
+            <div className="flex flex-col gap-1">
+              <div className="flex items-center gap-2">
+                <h3 className="text-gray-500 text-[10px] font-black uppercase tracking-[0.2em]">
+                  Net Liquidation
+                </h3>
+                <button
+                  onClick={() => setIsPrivate(!isPrivate)}
+                  className="text-gray-500 hover:text-white transition"
+                >
+                  {isPrivate ? <EyeOffIcon /> : <EyeIcon />}
+                </button>
+              </div>
+              <span className="text-3xl font-black text-white tracking-tight mt-1">
+                {formatValue(traderMetrics.totalValue)}
+              </span>
+              <div
+                className={`text-xs font-bold ${traderMetrics.unrealizedPnL >= 0 ? "text-[#00ff9d]" : "text-red-500"}`}
+              >
+                {traderMetrics.unrealizedPnL >= 0 ? "+" : ""}
+                {traderMetrics.pnlPercent.toFixed(2)}% (24h)
+              </div>
+            </div>
+            <div className="text-right flex flex-col gap-1">
+              <div>
+                <p className="text-[9px] text-gray-500 font-bold uppercase">
+                  Realized
+                </p>
+                <p className="text-xs font-mono text-[#00ff9d]">
+                  {isPrivate
+                    ? "****"
+                    : `+$${traderMetrics.realizedPnL.toLocaleString()}`}
+                </p>
+              </div>
 
-          <div className="flex items-center gap-2 mb-2">
-            <h3 className="text-gray-500 text-[10px] font-black uppercase tracking-[0.2em]">
-              Net Liquidation
-            </h3>
-            <button
-              onClick={() => setIsPrivate(!isPrivate)}
-              className="text-gray-500 hover:text-white transition"
-            >
-              {isPrivate ? <EyeOffIcon /> : <EyeIcon />}
-            </button>
-          </div>
-
-          <span className="text-3xl font-black text-white tracking-tight">
-            {formatValue(traderMetrics.totalValue)}
-          </span>
-          <div
-            className={`text-xs font-bold mt-2 ${traderMetrics.unrealizedPnL >= 0 ? "text-[#00ff9d]" : "text-red-500"}`}
-          >
-            {traderMetrics.unrealizedPnL >= 0 ? "+" : ""}
-            {traderMetrics.pnlPercent.toFixed(2)}% (24h)
+              <div className="mt-1">
+                <p className="text-[9px] text-gray-500 font-bold uppercase">
+                  Unrealized
+                </p>
+                <p
+                  className={`text-xs font-mono ${traderMetrics.unrealizedPnL >= 0 ? "text-[#00f0ff]" : "text-red-500"}`}
+                >
+                  {isPrivate
+                    ? "****"
+                    : (traderMetrics.unrealizedPnL >= 0 ? "+" : "") +
+                      `$${traderMetrics.unrealizedPnL.toLocaleString()}`}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
         <div className="bg-[#151921] p-6 rounded-2xl border border-[#2A2F3A]">
@@ -255,7 +262,7 @@ const Dashboard = () => {
             <div>
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-sm font-black text-white italic tracking-widest flex items-center gap-2">
-                 SAURON AI
+                  SAURON AI
                 </h2>
                 <div className="px-2 py-0.5 rounded bg-green-500/10 border border-green-500/20 text-[9px] text-green-400 font-mono animate-pulse">
                   ONLINE
