@@ -141,11 +141,11 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-        <div className="bg-[#151921] p-6 rounded-2xl border border-[#2A2F3A] shadow-lg relative overflow-hidden group hover:border-[#00f0ff]/30 transition">
-          <div className="flex justify-between items-start">
-            <div className="flex flex-col gap-1">
+        <div className="bg-[#151921] p-4 rounded-2xl border border-[#2A2F3A] shadow-lg relative overflow-hidden group hover:border-[#00f0ff]/30 transition">
+          <div className="flex flex-wrap justify-between items-start gap-4">
+            <div className="flex flex-col gap-1 min-w-[140px]">
               <div className="flex items-center gap-2">
-                <h3 className="text-gray-500 text-[10px] font-black uppercase tracking-[0.2em]">
+                <h3 className="text-gray-500 text-[10px] font-black uppercase tracking-[0.2em] whitespace-nowrap">
                   Net Liquidation
                 </h3>
                 <button
@@ -155,9 +155,11 @@ const Dashboard = () => {
                   {isPrivate ? <EyeOffIcon /> : <EyeIcon />}
                 </button>
               </div>
+
               <span className="text-3xl font-black text-white tracking-tight mt-1">
                 {formatValue(traderMetrics.totalValue)}
               </span>
+
               <div
                 className={`text-xs font-bold ${traderMetrics.unrealizedPnL >= 0 ? "text-[#00ff9d]" : "text-red-500"}`}
               >
@@ -165,7 +167,7 @@ const Dashboard = () => {
                 {traderMetrics.pnlPercent.toFixed(2)}% (24h)
               </div>
             </div>
-            <div className="text-right flex flex-col gap-1">
+            <div className="flex flex-col gap-2 items-end text-right">
               <div>
                 <p className="text-[9px] text-gray-500 font-bold uppercase">
                   Realized
@@ -177,7 +179,7 @@ const Dashboard = () => {
                 </p>
               </div>
 
-              <div className="mt-1">
+              <div>
                 <p className="text-[9px] text-gray-500 font-bold uppercase">
                   Unrealized
                 </p>
