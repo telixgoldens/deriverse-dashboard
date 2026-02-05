@@ -3,11 +3,11 @@ import { AdvancedRealTimeChart } from "react-ts-tradingview-widgets";
 import { useTheme } from "../context/ThemeContext";
 
 const TERMINAL_DATA = {
-  price: 142.5,
+  price: 97.5,
   change24h: +5.2,
   vol24h: "1.2B",
-  high24h: 145.0,
-  low24h: 132.2,
+  high24h: 99.0,
+  low24h: 89.2,
 };
 
 const TokenTerminal = ({ token, onClose, onSwap }) => {

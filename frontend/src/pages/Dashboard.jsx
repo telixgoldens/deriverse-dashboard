@@ -178,7 +178,6 @@ const Dashboard = () => {
                     : `+$${traderMetrics.realizedPnL.toLocaleString()}`}
                 </p>
               </div>
-
               <div>
                 <p className="text-[9px] text-gray-500 font-bold uppercase">
                   Unrealized
@@ -326,7 +325,7 @@ const Dashboard = () => {
           </h3>
           <p className="text-xs text-gray-300">
             Limit Orders perform{" "}
-            <span className="text-[#00ff9d] font-bold">14% better</span> than
+            <span className="text-[#00ff9d] font-bold">12% better</span> than
             Market.
           </p>
         </div>
@@ -335,13 +334,13 @@ const Dashboard = () => {
             <p className="text-[9px] text-gray-500 font-bold uppercase">
               Limit Order PnL
             </p>
-            <p className="text-lg font-black text-[#00ff9d]">+ $1,240</p>
+            <p className="text-lg font-black text-[#00ff9d]">+ $980</p>
           </div>
           <div className="text-right">
             <p className="text-[9px] text-gray-500 font-bold uppercase">
               Market Order PnL
             </p>
-            <p className="text-lg font-black text-red-500">- $320</p>
+            <p className="text-lg font-black text-red-500">- $120</p>
           </div>
         </div>
       </div>

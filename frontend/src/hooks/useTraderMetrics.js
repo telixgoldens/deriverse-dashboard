@@ -13,7 +13,7 @@ export const useTraderMetrics = (portfolio, timeframe = '30D') => {
       'ALL': 3,
     }[timeframe] || 1;
 
-    const realizedPnL = Math.round(4203.5 * timeframeMultiplier * 100) / 100;
+    const realizedPnL = Math.round(987.5 * timeframeMultiplier * 100) / 100;
     const totalPnL = unrealizedPnL + realizedPnL;
     const baseWin = unrealizedPnL >= 0 ? 64.2 : 41.5;
     const winRateMultiplier = {
@@ -49,8 +49,8 @@ export const useTraderMetrics = (portfolio, timeframe = '30D') => {
           long: longPercentage, 
           short: 100 - longPercentage 
       },
-      bestTrade: { symbol: "SOL", amount: Math.round(420 * timeframeMultiplier) },
-      worstTrade: { symbol: "WIF", amount: -150 },
+      bestTrade: { symbol: "SOL", amount: Math.round(220 * timeframeMultiplier) },
+      worstTrade: { symbol: "WIF", amount: -50 },
     };
   }, [portfolio, timeframe]);
 };

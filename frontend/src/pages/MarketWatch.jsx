@@ -7,9 +7,9 @@ const MarketWatch = ({ onTrade }) => {
   });
 
   const assets = [
-    { symbol: "SOL", price: 145.23, change: 5.4, volume: "1.2B", cap: "65B" },
-    { symbol: "BTC", price: 64230.00, change: -1.2, volume: "24B", cap: "1.2T" },
-    { symbol: "ETH", price: 3450.12, change: 2.1, volume: "12B", cap: "400B" },
+    { symbol: "SOL", price: 95.23, change: 5.4, volume: "1.2B", cap: "65B" },
+    { symbol: "BTC", price: 74230.00, change: -1.2, volume: "24B", cap: "1.2T" },
+    { symbol: "ETH", price: 2150.12, change: 2.1, volume: "12B", cap: "400B" },
     { symbol: "JUP", price: 1.23, change: 12.5, volume: "450M", cap: "1.2B" },
     { symbol: "BONK", price: 0.000023, change: -5.4, volume: "120M", cap: "800M" },
   ];
