@@ -98,6 +98,7 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  padding-right: 10px;
 }
 
 .hero-subtitle {
