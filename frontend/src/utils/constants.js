@@ -8,9 +8,9 @@ export const MOCK_HOLDINGS = [
     leverage: 5,
     quantity: 145.2, 
     entryPrice: 124.50,
-    price: 142.80, // Current Mark Price
+    price: 142.80, 
     liquidationPrice: 105.20,
-    fees: 1.25, // Added for Fee Composition Req
+    fees: 1.25, 
     pnl: 2657.16,
     pnlPercent: 14.6,
     value: 20734.56,
@@ -26,7 +26,7 @@ export const MOCK_HOLDINGS = [
     entryPrice: 1.25,
     price: 1.18,
     liquidationPrice: 1.45,
-    fees: 4.50, // High fee on short
+    fees: 4.50,
     pnl: 1050.00,
     pnlPercent: 5.6,
     value: 17700.00,

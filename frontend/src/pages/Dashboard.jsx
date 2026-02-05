@@ -12,7 +12,6 @@ import { useTraderMetrics } from "../hooks/useTraderMetrics";
 import { Web3Service } from "../utils/services";
 import { MOCK_HOLDINGS } from "../utils/constants";
 
-// SOLANA MINT ADDRESSES
 const TOKEN_ADDRESSES = {
   SOL: "So11111111111111111111111111111111111111112",
   USDC: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
@@ -20,7 +19,6 @@ const TOKEN_ADDRESSES = {
   JUP: "JUPyiwrYJFskUPiHa7hkeR8VUtkOpE72nX7KedKK8Uh",
 };
 
-// --- ICONS (Defined here to avoid import errors) ---
 const EyeIcon = () => (
   <svg
     className="w-4 h-4"
@@ -63,19 +61,13 @@ const Dashboard = () => {
   const { theme } = useTheme();
   const [view, setView] = useState("dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  // CORE STATE
   const [portfolio] = useState(MOCK_HOLDINGS);
   const [walletConnected, setWalletConnected] = useState(false);
   const [walletAddress, setWalletAddress] = useState(null);
   const [modalContent, setModalContent] = useState(null);
   const [isPrivate, setIsPrivate] = useState(false);
-
-  // FILTERS
   const [dateRange, setDateRange] = useState("30D");
   const [symbolFilter, setSymbolFilter] = useState("ALL");
-
-  // INTERACTION STATE
   const [swapAmount, setSwapAmount] = useState("");
   const [selectedTrade, setSelectedTrade] = useState(null);
   const [isJournalOpen, setIsJournalOpen] = useState(false);
@@ -91,24 +83,15 @@ const Dashboard = () => {
     checkConnection();
   }, []);
 
-  // --- USE THE HOOK HERE ---
-  const traderMetrics = useTraderMetrics(portfolio);
-
-  // Inside your Dashboard component...
-
+  const traderMetrics = useTraderMetrics(portfolio, dateRange);
   const handleTradeFromMarket = (asset) => {
-    // 1. Set the token data so the Terminal knows which chart to show
     setTerminalToken({
       ...asset,
-      side: "long", // Default values for the terminal
+      side: "long", 
       leverage: "1",
       pnl: 0,
     });
-    // 2. (Optional) If you want it to switch the background view to terminal:
-    // setView('dashboard');
   };
-
-  // ... in your return block, find where you render MarketWatch:
 
   const handleConnectWallet = async () => {
     try {
@@ -136,7 +119,6 @@ const Dashboard = () => {
 
   const renderDashboard = () => (
     <div className="space-y-6 text-white animate-in fade-in duration-500">
-      {/* 0. FILTER BAR */}
       <div className="flex justify-between items-center bg-[#151921] p-2 rounded-xl border border-[#2A2F3A]">
         <div className="flex gap-2">
           {["1D", "7D", "30D", "ALL"].map((range) => (
@@ -158,12 +140,8 @@ const Dashboard = () => {
           </span>
         </div>
       </div>
-
-      {/* 1. HERO METRICS GRID */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-        {/* Net Worth (FIXED NESTING HERE) */}
         <div className="bg-[#151921] p-6 rounded-2xl border border-[#2A2F3A] shadow-lg relative overflow-hidden group hover:border-[#00f0ff]/30 transition">
-          {/* Realized Breakdown (Now properly inside the relative container) */}
           <div className="absolute top-4 right-4 text-right z-10">
             <p className="text-[9px] text-gray-500 font-bold uppercase">
               Realized
@@ -190,7 +168,6 @@ const Dashboard = () => {
             <h3 className="text-gray-500 text-[10px] font-black uppercase tracking-[0.2em]">
               Net Liquidation
             </h3>
-            {/* Privacy Toggle (Moved inside) */}
             <button
               onClick={() => setIsPrivate(!isPrivate)}
               className="text-gray-500 hover:text-white transition"
@@ -209,8 +186,6 @@ const Dashboard = () => {
             {traderMetrics.pnlPercent.toFixed(2)}% (24h)
           </div>
         </div>
-
-        {/* Win Rate */}
         <div className="bg-[#151921] p-6 rounded-2xl border border-[#2A2F3A]">
           <h3 className="text-gray-500 text-[10px] font-black uppercase tracking-[0.2em] mb-2">
             Win Rate
@@ -227,8 +202,6 @@ const Dashboard = () => {
             ></div>
           </div>
         </div>
-
-        {/* Long/Short Ratio */}
         <div className="bg-[#151921] p-6 rounded-2xl border border-[#2A2F3A]">
           <h3 className="text-gray-500 text-[10px] font-black uppercase tracking-[0.2em] mb-2">
             Long / Short Bias
@@ -252,8 +225,6 @@ const Dashboard = () => {
             ></div>
           </div>
         </div>
-
-        {/* Risk Stats */}
         <div className="bg-[#151921] p-6 rounded-2xl border border-[#2A2F3A] flex flex-col justify-between">
           <div className="flex justify-between items-center border-b border-[#2A2F3A] pb-2">
             <span className="text-[9px] font-black text-gray-500 uppercase">
@@ -275,19 +246,16 @@ const Dashboard = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Main Chart */}
-        <div className="lg:col-span-2 bg-[#151921] rounded-2xl border border-[#2A2F3A] p-1 h-[350px]">
+        <div className="lg:col-span-2  rounded-2xl p-1 h-[350px]">
           <VisualizationMock metrics={traderMetrics} theme="deriverse" />
         </div>
-
-        {/* AI Insight & Playbook */}
         <div className="flex flex-col gap-6">
           <div className="bg-gradient-to-b from-[#151921] to-[#0B0E11] p-6 rounded-2xl border border-[#2A2F3A] flex flex-col justify-between relative overflow-hidden flex-1">
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-purple-600/20 blur-3xl rounded-full pointer-events-none"></div>
             <div>
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-sm font-black text-white italic tracking-widest flex items-center gap-2">
-                  <span className="text-purple-500">◈</span> SAURON AI
+                 SAURON AI
                 </h2>
                 <div className="px-2 py-0.5 rounded bg-green-500/10 border border-green-500/20 text-[9px] text-green-400 font-mono animate-pulse">
                   ONLINE
@@ -325,8 +293,6 @@ const Dashboard = () => {
               </span>
             </button>
           </div>
-
-          {/* Playbook Widget */}
           <div className="bg-[#151921] p-4 rounded-2xl border border-[#2A2F3A]">
             <h3 className="text-gray-500 text-[10px] font-black uppercase tracking-[0.2em] mb-2">
               Session Performance
@@ -344,8 +310,6 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-
-      {/* EXECUTION QUALITY */}
       <div className="bg-[#151921] p-6 rounded-2xl border border-[#2A2F3A] flex justify-between items-center">
         <div>
           <h3 className="text-gray-500 text-[10px] font-black uppercase tracking-[0.2em] mb-1">
@@ -372,8 +336,6 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-
-      {/* TRADE HISTORY */}
       <div className="bg-[#151921] p-6 rounded-2xl border border-[#2A2F3A]">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xs font-black uppercase text-gray-400 tracking-[0.2em]">

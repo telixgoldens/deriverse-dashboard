@@ -1,5 +1,4 @@
 export const Web3Service = {
-  // 1. Connect Wallet (Phantom Support)
   connectWallet: async () => {
     try {
       const provider = window.solana;
@@ -11,7 +10,6 @@ export const Web3Service = {
           provider 
         };
       } else {
-        // Fallback for Demo (if no wallet installed)
         console.warn("Phantom not found. Simulating connection...");
         return new Promise((resolve) => {
           setTimeout(() => {
@@ -19,7 +17,7 @@ export const Web3Service = {
               address: "5KTn...92x (Demo)", 
               provider: null 
             });
-          }, 600); // 600ms latency feels snappy
+          }, 600); 
         });
       }
     } catch (error) {
@@ -28,18 +26,14 @@ export const Web3Service = {
     }
   },
 
-  // 2. Mock Fetching Balances
   getTokenBalance: async (tokenAddress, walletAddress) => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        // Return realistic balances for a "Pro Trader" demo
         const balanceRanges = {
-          'SOL': () => (Math.random() * 50 + 10).toFixed(4), // Always have SOL for gas
-          'USDC': () => (Math.random() * 5000 + 1000).toFixed(2), // Good collateral
+          'SOL': () => (Math.random() * 50 + 10).toFixed(4), 
+          'USDC': () => (Math.random() * 5000 + 1000).toFixed(2), 
           'default': () => (Math.random() * 100).toFixed(4)
         };
-        
-        // Handle symbol inputs vs address inputs
         const key = tokenAddress.length < 10 ? tokenAddress : 'default'; 
         const getBalance = balanceRanges[key] || balanceRanges.default;
         resolve(getBalance());
@@ -47,12 +41,10 @@ export const Web3Service = {
     });
   },
 
-  // 3. Mock Transaction Approval/Signing
   signTransaction: async (transaction) => {
     console.log("Signing Solana Transaction...", transaction);
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        // Simulate 95% success rate
         if (Math.random() > 0.05) {
           resolve({
             signature: `${Math.random().toString(36).substring(2, 15)}...`,
@@ -67,7 +59,6 @@ export const Web3Service = {
   }
 };
 
-// AI SERVICE (Sauron Eye)
 export const AIService = {
   fetchAssetAnalysis: async (symbol) => {
     return new Promise((resolve) => {
@@ -87,14 +78,12 @@ export const AIService = {
   }
 };
 
-// MOCK PRICE FEED
 export const fetchLivePrices = async (holdings) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       const prices = {};
       holdings.forEach(holding => {
         const symbol = holding.symbol;
-        // Introduce small random fluctuations (Live Ticker feel)
         const fluctuation = 1 + (Math.random() * 0.02 - 0.01); 
         
         prices[symbol] = {

@@ -1,57 +1,56 @@
 import { useMemo } from 'react';
 
-export const useTraderMetrics = (portfolio) => {
+export const useTraderMetrics = (portfolio, timeframe = '30D') => {
   return useMemo(() => {
-    // 1. Basic PnL & Value
     const totalValue = portfolio.reduce((sum, item) => sum + item.quantity * (item.price || 0), 0);
     const costBasis = portfolio.reduce((sum, item) => sum + item.quantity * item.entryPrice, 0);
-    
-    // Calculate Unrealized (Floating PnL of open positions)
     const unrealizedPnL = portfolio.reduce((sum, item) => sum + item.pnl, 0);
     
-    // 2. Mock Realized PnL (Money already banked from closed trades)
-    // In a real production app, this would come from a separate "History" API endpoint
-    const realizedPnL = 4203.50; 
-    
-    const totalPnL = unrealizedPnL + realizedPnL;
-    
-    // 3. Advanced Stats
-    // Logic: If PnL is positive, we assume a higher win rate for the demo
-    const winRate = unrealizedPnL >= 0 ? 64.2 : 41.5;
-    const avgDuration = "4h 12m";
+    const timeframeMultiplier = {
+      '1D': 0.05,
+      '7D': 0.25,
+      '30D': 1,
+      'ALL': 3,
+    }[timeframe] || 1;
 
-    // 4. Long/Short Ratio Logic
+    const realizedPnL = Math.round(4203.5 * timeframeMultiplier * 100) / 100;
+    const totalPnL = unrealizedPnL + realizedPnL;
+    const baseWin = unrealizedPnL >= 0 ? 64.2 : 41.5;
+    const winRateMultiplier = {
+      '1D': 0.95,
+      '7D': 0.98,
+      '30D': 1,
+      'ALL': 1.03,
+    }[timeframe] || 1;
+    const winRate = Math.round(baseWin * winRateMultiplier * 10) / 10;
+    const avgDuration = timeframe === '1D' ? '2h 10m' : '4h 12m';
     const longCount = portfolio.filter((p) => p.side === "long").length;
     const shortCount = portfolio.filter((p) => p.side === "short").length;
     const totalCount = longCount + shortCount || 1;
     const longPercentage = Math.round((longCount / totalCount) * 100);
-
-    // 5. Fee Calculations
-    // We sum up the fees from the individual positions in the portfolio
     const calculatedFees = portfolio.reduce((sum, item) => sum + (item.fees || 0), 0);
-    const totalFees = 12.5 + calculatedFees; // Base fees + active position fees
+    const totalFees = Math.round((12.5 + calculatedFees) * timeframeMultiplier * 100) / 100; 
 
     return {
       totalValue,
       unrealizedPnL,
       realizedPnL,
       totalPnL,
-      // Avoid division by zero
       pnlPercent: costBasis > 0 ? (unrealizedPnL / costBasis) * 100 : 0,
       winRate,
       profitFactor: unrealizedPnL >= 0 ? 2.4 : 0.8,
       totalFees: totalFees.toFixed(2),
       feeBreakdown: { 
-          network: (totalFees * 0.3).toFixed(2), // Mock split: 30% network
-          swap: (totalFees * 0.7).toFixed(2)     // Mock split: 70% swap
+          network: (totalFees * 0.3).toFixed(2), 
+          swap: (totalFees * 0.7).toFixed(2)     
       },
       avgDuration,
       longShortRatio: { 
           long: longPercentage, 
           short: 100 - longPercentage 
       },
-      bestTrade: { symbol: "SOL", amount: 420 },
+      bestTrade: { symbol: "SOL", amount: Math.round(420 * timeframeMultiplier) },
       worstTrade: { symbol: "WIF", amount: -150 },
     };
-  }, [portfolio]);
+  }, [portfolio, timeframe]);
 };

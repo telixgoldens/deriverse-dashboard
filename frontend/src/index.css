@@ -29,8 +29,6 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #00f0ff; 
 }
-
-/* For Firefox */
 * {
   scrollbar-width: thin;
   scrollbar-color: #2A2F3A #0B0E11;

@@ -14,7 +14,6 @@ const MarketWatch = ({ onTrade }) => {
     { symbol: "BONK", price: 0.000023, change: -5.4, volume: "120M", cap: "800M" },
   ];
 
-  // Save watchlist whenever it changes
   useEffect(() => {
     localStorage.setItem('deriverse_watchlist', JSON.stringify(watchlist));
   }, [watchlist]);
@@ -37,7 +36,7 @@ const MarketWatch = ({ onTrade }) => {
         <table className="w-full text-left">
           <thead className="bg-[#0B0E11] text-gray-500 text-[10px] uppercase font-black tracking-wider">
             <tr>
-              <th className="p-4 w-10"></th> {/* Star Column */}
+              <th className="p-4 w-10"></th>
               <th className="p-4">Asset</th>
               <th className="p-4 text-right">Price</th>
               <th className="p-4 text-right">24h Change</th>
@@ -48,7 +47,7 @@ const MarketWatch = ({ onTrade }) => {
             {assets.map((asset) => (
               <tr 
                 key={asset.symbol} 
-                onClick={() => onTrade(asset)} // Navigates on row click
+                onClick={() => onTrade(asset)} 
                 className="hover:bg-white/5 transition group cursor-pointer"
               >
                 <td className="p-4">
